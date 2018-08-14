@@ -1,0 +1,13 @@
+{
+  "name": "dendro",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "bin": {
+    "dendro": "index.js"
+  },
+  "dependencies": {
+    "commander": "^2.17.1",
+    "match-all": "^1.2.4"
+  }
+}
