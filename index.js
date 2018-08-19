@@ -8,10 +8,10 @@ const cwd = process.cwd();
 program
   .version('0.0.1')
   .usage('[options] <file ...>')
-  .option('-f, --foo', 'does nothing')
+  .option('-o, --output [file]', 'save output to a JSON file')
   .parse(process.argv);
 
-if (program.args.length !== 1) {
+if (program.args.length < 1) {
     program.outputHelp();
     process.exit(1);
 }
@@ -38,36 +38,21 @@ const isFile = x => x.startsWith(".");
 
 const plugins = {
     flow: {
-        processFile: (content) => {
-            return  /\/\/ @flow/.test(content);
-        },
-        aggregateResults: (results) => {
-            const values = Object.values(results);
-            const total = values.length;
-            const flowCount = values.filter(value => value).length;
-            return flowCount / total;
-        },
+        processFile: (content) => /\/\/ @flow/.test(content),
+        type: "boolean",
     },
     "eslint-disable": {
-        processFile: (content) => {
-            return /\/\* eslint-disable/.test(content);
-        },
-        aggregateResults: (results) => {
-            const values = Object.values(results);
-            const total = values.length;
-            const eslintCount = values.filter(value => value).length;
-            return eslintCount / total;
-        },
+        processFile: (content) => /\/\* eslint-disable/.test(content),
+        type: "boolean",
     },
+    "file-size": {
+        processFile: (content) => content.length,
+        type: "number",
+    }
 };
 
 const map = {};
-const pluginResults = Object.keys(plugins).reduce((accum, key) => {
-    return {
-        ...accum,
-        [key]: {},
-    };
-}, {});
+const pluginResults = {};
 
 const walk = function(filename, depth = 0) {
     if (filename in map) {
@@ -109,7 +94,10 @@ const walk = function(filename, depth = 0) {
         }
 
         for (const [name, plugin] of Object.entries(plugins)) {
-            pluginResults[name][filename] = plugin.processFile(content);
+            if (!pluginResults[filename]) {
+                pluginResults[filename] = {};
+            }
+            pluginResults[filename][name] = plugin.processFile(content);
         }
     }
 }
@@ -117,9 +105,14 @@ const walk = function(filename, depth = 0) {
 walk(entry);
 
 const output = Object.keys(map).reduce((accum, file) => {
+    const type = fs.existsSync(path.join(cwd, file))
+        ? "file"
+        : "module";
+
     return {
         ...accum,
         [file]: {
+            type: type,
             dependents: [],
             dependencies: [],
         },
@@ -135,13 +128,25 @@ for (const [file, dependencies] of Object.entries(map)) {
     }
 }
 
+Object.keys(pluginResults).forEach(file => {
+    output[file].results = pluginResults[file];
+})
+
 for (const [name, plugin] of Object.entries(plugins)) {
-    console.log(`results for ${name}`);
-    const results = pluginResults[name];
-    const result = plugin.aggregateResults(results);
-    console.log(result);
+    const values = Object.values(pluginResults).map(result => result[name]);
+    // const results = pluginResults[name];
+    // const values = Object.values(results);
+    const sum = values.reduce((a, x) => a + x, 0);
+    if (plugin.type === "boolean") {
+        console.log(`${name}: ${sum} / ${values.length} = ${sum / values.length} (average)`);
+    } else if (plugin.type === "number") {
+        console.log(`${name}: ${sum} (total)`);
+    }
 }
 
-// console.log(pluginResults);
+console.log(output);
 
-// const reverseResults = {};
+if (program.output) {
+    fs.writeFileSync(path.join(cwd, program.output), JSON.stringify(output, null, 4), "utf-8");
+    console.log(`wrote: ${program.output}`);
+}
