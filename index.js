@@ -42,7 +42,13 @@ const plugins = {
         type: "boolean",
     },
     "eslint-disable": {
-        processFile: (content) => /\/\* eslint-disable/.test(content),
+        processFile: (content) => {
+            // TODO(kevinb): find all eslint disable messages in a file
+            const match = content.match(/\/\* eslint-disable ([^\*]+)\*\//);
+            return match
+                ? match[1].trim().split(", ")
+                : [];
+        },
         type: "boolean",
     },
     "file-size": {
