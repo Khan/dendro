@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@khanacademy/wonder-blocks-core": "^1.1.1",
+    "@khanacademy/wonder-blocks-layout": "^1.0.3",
+    "@khanacademy/wonder-blocks-typography": "^1.0.6",
     "aphrodite": "^2.2.2",
     "commander": "^2.17.1",
     "match-all": "^1.2.4",
@@ -20,10 +22,12 @@
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "http-server": "^0.11.1",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
+    "start": "http-server build",
     "watch": "webpack -w"
   }
 }
