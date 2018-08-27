@@ -2,22 +2,24 @@ const matchAll = require("./match-all.js");
 
 const count = (data) => data.filter(Boolean).length;
 const sum = (data) => data.reduce((a, x) => a + x, 0);
-const not = x => !x;
 
 module.exports = {
     bytes: {
         label: "bytes",
         processFile: (content) => content.length,
-        getResult: (data) => {
-            return data.reduce((a, x) => a + x, 0);
-        },
+        getResult: (data) => `${sum(data)} bytes`,
+    },
+    files: {
+        label: "files",
+        processFile: (content) => true,
+        getResult: (data) => `${count(data)} files`,
     },
 
     // code quality
     flow: {
         label: "not using @flow",
-        processFile: (content) => /\/\/ @flow/g.test(content),
-        getResult: (data) => `${count(data.map(not))} files`,
+        processFile: (content) => !/\/\/ @flow/g.test(content),
+        getResult: (data) => `${count(data)} files`,
     },
     any: {
         label: "any",
@@ -115,12 +117,12 @@ module.exports = {
 
     // navigation
     deprecatedLink: {
-        label: "uses deprecated Link",
+        label: "Link (deprecated)",
         processFile: (content) => /link-package\/link\.jsx/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
     deprecatedClientLink: {
-        label: "uses deprecated ClientLink",
+        label: "ClientLink (deprecated)",
         processFile: (content) => /link-package\/client-link\.jsx/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },

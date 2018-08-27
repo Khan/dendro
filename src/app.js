@@ -20,7 +20,7 @@ export default class App extends React.Component<{}> {
 
     render() {
         return <HashRouter>
-            <View>
+            <View style={styles.container}>
                 <View style={styles.row}>
                     <Link to="/files">
                         Files
@@ -43,7 +43,11 @@ export default class App extends React.Component<{}> {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        height: "100%",
+    },
     row: {
         flexDirection: "row",
+        flexShrink: 0,
     },
 });

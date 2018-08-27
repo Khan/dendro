@@ -2,8 +2,9 @@
 import * as React from "react";
 import {StyleSheet, css} from "aphrodite";
 
+import Color from "@khanacademy/wonder-blocks-color";
 import {View} from "@khanacademy/wonder-blocks-core";
-import {HeadingLarge, HeadingMedium, LabelLarge, LabelMedium} from "@khanacademy/wonder-blocks-typography";
+import {HeadingLarge, HeadingMedium, HeadingSmall, LabelLarge, LabelMedium} from "@khanacademy/wonder-blocks-typography";
 import {Strut} from "@khanacademy/wonder-blocks-layout";
 import plugins from "../plugins/all-plugins.js";
 
@@ -12,6 +13,10 @@ type Props = {
 };
 
 const config = [
+    {
+        label: "General",
+        stats: ["files", "bytes"],
+    },
     {
         label: "Code Quality",
         stats: ["flow", "any", "eslintDisable", "$FlowFixMe"],
@@ -34,7 +39,7 @@ const config = [
     },
     {
         label: "State",
-        stats: ["backboneModel", "apollo", "redux"],
+        stats: ["backboneModel", "redux", "apollo"],
     },
     {
         label: "Styling",
@@ -42,7 +47,17 @@ const config = [
     },
 ];
 
+type State = {
+    stat: string,
+}
 export default class Stats extends React.Component<Props> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            stat: "flow",
+        };
+    }
+
     getRawResults(pluginName) {
         return Object.values(this.props.data)
             .filter(file => file.results)
@@ -53,12 +68,21 @@ export default class Stats extends React.Component<Props> {
         return <React.Fragment>
             <tr>
                 <td className={css(styles.cell, styles.section)} colSpan={2}>
-                    <HeadingMedium>{section.label}</HeadingMedium>
+                    <HeadingSmall>{section.label}</HeadingSmall>
                 </td>
             </tr>
-            {section.stats.map(key => 
-                <tr key={key}>
-                    <th className={css(styles.cell, styles.label)}>
+            {section.stats.map(key => {
+                return <tr key={key}>
+                    <th 
+                        className={
+                            css(
+                                styles.cell, 
+                                styles.label, 
+                                key === this.state.stat && styles.selected,
+                            )
+                        }
+                        onClick={() => this.setState({stat: key})}
+                    >
                         <LabelLarge>{plugins[key].label}</LabelLarge>
                     </th>
                     <td className={css(styles.cell)}>
@@ -66,20 +90,45 @@ export default class Stats extends React.Component<Props> {
                             {plugins[key].getResult(this.getRawResults(key))}
                         </LabelMedium>
                     </td>
-                </tr>)
-            }
+                </tr>;
+            })}
         </React.Fragment>;
     }
 
     render() {
+        const {data} = this.props;
         return <View style={styles.container}>
-            <HeadingLarge>Package Stats</HeadingLarge>
-            <table className={css(styles.table)}>
-                <tbody>
-                    {config.map(section => this.renderSection(section))}
-                </tbody>
-            </table>
-            
+            <View style={styles.column}>
+                <HeadingLarge>Package Stats</HeadingLarge>
+                <table className={css(styles.table)}>
+                    <tbody>
+                        {config.map(section => this.renderSection(section))}
+                    </tbody>
+                </table>
+            </View>
+            <View style={styles.column}>
+                <table>
+                    <tbody>
+                        {Object.keys(data).sort().map(filename => {
+                            const value = data[filename];
+                            if (value.results && value.results[this.state.stat]) {
+                                let stat = value.results[this.state.stat];
+                                stat = Array.isArray(stat) ? stat.length : stat;
+                                if (!stat) {
+                                    return null;
+                                }
+                                return <tr key={filename}>
+                                    <td className={css(styles.cell)}>
+                                        <LabelMedium>{filename}</LabelMedium>
+                                    </td>
+                                </tr>;
+                            } else {
+                                return null;
+                            }
+                        })}
+                    </tbody>
+                </table>
+            </View>
         </View>;
     }
 }
@@ -87,6 +136,15 @@ export default class Stats extends React.Component<Props> {
 const styles = StyleSheet.create({
     container: {
         flexShrink: 0,
+        flexDirection: "row",
+        color: Color.offBlack,
+        flexGrow: 1,
+        height: "calc(100% - 20px)",
+    },
+    column: {
+        flexShrink: 0,
+        marginRight: 48,
+        overflow: "auto",
     },
     table: {
         borderCollapse: "collapse",
@@ -102,5 +160,16 @@ const styles = StyleSheet.create({
     label: {
         textAlign: 'left',
         paddingLeft: 16,
+        paddingRight: 16,
+        cursor: "pointer",
+        ":hover": {
+            background: Color.offBlack16,
+        },
+    },
+    selected: {
+        background: Color.teal,
+        ":hover": {
+            background: Color.teal,
+        },
     },
 });

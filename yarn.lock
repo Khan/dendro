@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@khanacademy/wonder-blocks-color@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-color/-/wonder-blocks-color-1.0.6.tgz#623ad25f17c9967397399545375c1c0a9795b04f"
+
 "@khanacademy/wonder-blocks-core@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-core/-/wonder-blocks-core-1.1.1.tgz#e7451e6f25634ec643ebe016bd26f6116e82461a"
