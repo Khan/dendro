@@ -12,7 +12,6 @@
     "@khanacademy/wonder-blocks-typography": "^1.0.6",
     "aphrodite": "^2.2.2",
     "commander": "^2.17.1",
-    "match-all": "^1.2.4",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1"

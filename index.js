@@ -3,6 +3,9 @@ const fs = require("fs");
 const path = require("path");
 const program = require('commander');
 
+const matchAll = require("./plugins/match-all.js");
+const plugins = require("./plugins/all-plugins.js");
+
 const cwd = process.cwd();
 
 program
@@ -16,46 +19,10 @@ if (program.args.length < 1) {
     process.exit(1);
 }
 
-const matchAll = (str, regex) => {
-    const matches = [];
-    
-    while (true) {
-        const match = regex.exec(str);
-        if (match) {
-            matches.push(match);
-        } else {
-            break;
-        }
-    }
-
-    return matches;
-};
-
 const entry = program.args[0];
 
 const isModule = x => !x.startsWith(".");
 const isFile = x => x.startsWith(".");
-
-const plugins = {
-    flow: {
-        processFile: (content) => /\/\/ @flow/.test(content),
-        type: "boolean",
-    },
-    "eslint-disable": {
-        processFile: (content) => {
-            // TODO(kevinb): find all eslint disable messages in a file
-            const match = content.match(/\/\* eslint-disable ([^\*]+)\*\//);
-            return match
-                ? match[1].trim().split(", ")
-                : [];
-        },
-        type: "boolean",
-    },
-    "file-size": {
-        processFile: (content) => content.length,
-        type: "number",
-    }
-};
 
 const map = {};
 const pluginResults = {};
