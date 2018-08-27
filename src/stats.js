@@ -11,6 +11,37 @@ type Props = {
     data: any,
 };
 
+const config = [
+    {
+        label: "Code Quality",
+        stats: ["flow", "any", "eslintDisable", "$FlowFixMe"],
+    },
+    {
+        label: "Data",
+        stats: ["gql", "fetch", "ajax"],
+    },
+    {
+        label: "Navigation",
+        stats: ["deprecatedLink", "deprecatedClientLink", "wonderBlocksLink"],
+    },
+    {
+        label: "Rendering",
+        stats: ["backboneView", "component", "createClass", "propTypes", "extendComponent"],
+    },
+    {
+        label: "Shared Components",
+        stats: ["sharedComponents", "wonderBlocks"],
+    },
+    {
+        label: "State",
+        stats: ["backboneModel", "apollo", "redux"],
+    },
+    {
+        label: "Styling",
+        stats: ["legacyCss"],
+    },
+];
+
 export default class Stats extends React.Component<Props> {
     getRawResults(pluginName) {
         return Object.values(this.props.data)
@@ -18,22 +49,37 @@ export default class Stats extends React.Component<Props> {
             .map(file => file.results[pluginName]);
     }
 
+    renderSection(section) {
+        return <React.Fragment>
+            <tr>
+                <td className={css(styles.cell, styles.section)} colSpan={2}>
+                    <HeadingMedium>{section.label}</HeadingMedium>
+                </td>
+            </tr>
+            {section.stats.map(key => 
+                <tr key={key}>
+                    <th className={css(styles.cell, styles.label)}>
+                        <LabelLarge>{plugins[key].label}</LabelLarge>
+                    </th>
+                    <td className={css(styles.cell)}>
+                        <LabelMedium>
+                            {plugins[key].getResult(this.getRawResults(key))}
+                        </LabelMedium>
+                    </td>
+                </tr>)
+            }
+        </React.Fragment>;
+    }
+
     render() {
         return <View style={styles.container}>
-            <HeadingLarge>Package Stats</HeadingLarge> 
-            <table>
+            <HeadingLarge>Package Stats</HeadingLarge>
+            <table className={css(styles.table)}>
                 <tbody>
-                    {Object.entries(plugins).map(([key, value]) => 
-                        <tr key={key}>
-                            <th className={css(styles.label)}>
-                                {value.label}
-                            </th>
-                            <td>
-                                {value.getResult(this.getRawResults(key))}
-                            </td>
-                        </tr>)}
+                    {config.map(section => this.renderSection(section))}
                 </tbody>
             </table>
+            
         </View>;
     }
 }
@@ -42,7 +88,19 @@ const styles = StyleSheet.create({
     container: {
         flexShrink: 0,
     },
+    table: {
+        borderCollapse: "collapse",
+        marginLeft: 16,
+    },
+    cell: {
+        // border: `1px solid gray`,
+        padding: 2,
+    },
+    section: {
+        paddingTop: 16,
+    },
     label: {
-        textAlign: 'right',
+        textAlign: 'left',
+        paddingLeft: 16,
     },
 });

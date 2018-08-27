@@ -30,6 +30,8 @@ const pluginResults = {};
 const walk = function(filename, depth = 0) {
     if (filename in map) {
         return;
+    } else if (!fs.existsSync(path.join(cwd, filename))) {
+        return;
     } else {
         // console.log("  ".repeat(depth) + filename.replace("javascript/", ""));
 
@@ -97,7 +99,9 @@ const output = Object.keys(map).reduce((accum, file) => {
 for (const [file, dependencies] of Object.entries(map)) {
     output[file].dependencies = dependencies;
     for (const dep of dependencies) {
-        output[dep].dependents.push(file);
+        if (output[dep]) {
+            output[dep].dependents.push(file);
+        }
     }
 }
 

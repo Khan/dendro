@@ -13,6 +13,7 @@ module.exports = {
         },
     },
 
+    // code quality
     flow: {
         label: "not using @flow",
         processFile: (content) => /\/\/ @flow/g.test(content),
@@ -23,7 +24,6 @@ module.exports = {
         processFile: (content) => matchAll(content, /(: any\W|<any>)/g).length,
         getResult: (data) => `${count(data)} files (${sum(data)} uses)`,
     },
-
     eslintDisable: {
         label: "eslint-disable",
         processFile: (content) => {
@@ -38,13 +38,14 @@ module.exports = {
             return `${count(ruleCounts)} files (${sum(ruleCounts)} rules)`;
         },
     },
-
     // TODO(kevinb): update to track other $Flow comments we have
     $FlowFixMe: {
         label: "$FlowFixMe",
         processFile: (content) => matchAll(content, /\$FlowFixMe/g).length,
         getResult: (data) => `${count(data)} files (${sum(data)} uses)`,
     },
+
+    // data
     gql: {
         label: "gql`",
         processFile: (content) => /gql`/g.test(content),
@@ -60,9 +61,16 @@ module.exports = {
         processFile: (content) => /(\$\.get\(|\$\.post\(|\$\.ajax\()/g.test(content),
         getResult: (data) => `${count(data)} files (${sum(data)} uses)`,
     },
-    backbone: {
-        label: "Backbone",
-        processFile: (content) => /Backbone\./g.test(content),
+
+    // rendering
+    backboneView: {
+        label: "Backbone.View",
+        processFile: (content) => /Backbone\.View\.extend/g.test(content),
+        getResult: (data) => `${count(data)} files`,
+    },
+    component: {
+        label: "defines a component",
+        processFile: (content) => /(createClass\(\{|extends (React\.)?Component)/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
     createClass: {
@@ -70,24 +78,21 @@ module.exports = {
         processFile: (content) => /createClass\(\{/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
+    propTypes: {
+        label: "prop-types",
+        processFile: (content) => /\"prop-types\"/g.test(content),
+        getResult: (data) => `${count(data)} files`,
+    },
     extendComponent: {
         label: "extends React.Component",
         processFile: (content) => /extends (React\.)?Component/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
-    legacyCss: {
-        label: "importLegacyCSS",
-        processFile: (content) => /importLegacyCSS/g.test(content),
-        getResult: (data) => `${count(data)} files`,
-    },
-    wonderBlocks:{
-        label: "wonder-blocks", 
-        processFile: (content) => /@khanacademy\/wonder-blocks-/g.test(content),
-        getResult: (data) => `${count(data)} files`,
-    },
-    component: {
-        label: "defines a component",
-        processFile: (content) => /(createClass\(\{|extends (React\.)?Component)/g.test(content),
+
+    // state
+    backboneModel: {
+        label: "Backbone.Model",
+        processFile: (content) => /Backbone\.Model\.extend/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
     apollo: {
@@ -100,6 +105,15 @@ module.exports = {
         processFile: (content) => /(\"redux\"|\"react-redux\")/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
+
+    // styling
+    legacyCss: {
+        label: "importLegacyCSS",
+        processFile: (content) => /importLegacyCSS/g.test(content),
+        getResult: (data) => `${count(data)} files`,
+    },
+
+    // navigation
     deprecatedLink: {
         label: "uses deprecated Link",
         processFile: (content) => /link-package\/link\.jsx/g.test(content),
@@ -115,14 +129,16 @@ module.exports = {
         processFile: (content) => /\"@khanacademy\/wonder-blocks-link\"/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
-    deprecatedButtons: {
-        label: "uses deprecated Buttons",
-        processFile: (content) => /\/button-package\//g.test(content),
+    
+    // shared components
+    wonderBlocks: {
+        label: "wonder-blocks", 
+        processFile: (content) => /@khanacademy\/wonder-blocks-/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
-    wonderBlocksButton: {
-        label: "wonder-blocks-button",
-        processFile: (content) => /\"@khanacademy\/wonder-blocks-button\"/g.test(content),
+    sharedComponents: {
+        label: "shared-components",
+        processFile: (content) => /\.\.\/components\/([^-]+-)+package/g.test(content),
         getResult: (data) => `${count(data)} files`,
     },
 };
