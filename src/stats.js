@@ -50,6 +50,7 @@ const config = [
 type State = {
     stat: string,
 }
+
 export default class Stats extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
@@ -72,20 +73,20 @@ export default class Stats extends React.Component<Props> {
                 </td>
             </tr>
             {section.stats.map(key => {
-                return <tr key={key}>
+                return <tr key={key} className={css(styles.row, key === this.state.stat && styles.selected)}>
                     <th 
                         className={
                             css(
                                 styles.cell, 
                                 styles.label, 
-                                key === this.state.stat && styles.selected,
+                                styles.stat,
                             )
                         }
                         onClick={() => this.setState({stat: key})}
                     >
                         <LabelLarge>{plugins[key].label}</LabelLarge>
                     </th>
-                    <td className={css(styles.cell)}>
+                    <td className={css(styles.cell, styles.stat)}>
                         <LabelMedium>
                             {plugins[key].getResult(this.getRawResults(key))}
                         </LabelMedium>
@@ -135,36 +136,39 @@ export default class Stats extends React.Component<Props> {
 
 const styles = StyleSheet.create({
     container: {
-        flexShrink: 0,
+        flexShrink: 1,
         flexDirection: "row",
         color: Color.offBlack,
         flexGrow: 1,
-        height: "calc(100% - 20px)",
+        height: "100%",
     },
     column: {
         flexShrink: 0,
-        marginRight: 48,
+        paddingRight: 48,
         overflow: "auto",
     },
     table: {
         borderCollapse: "collapse",
         marginLeft: 16,
     },
+    row: {
+        cursor: "pointer",
+        ":hover": {
+            background: Color.offBlack16,
+        },
+    },
     cell: {
-        // border: `1px solid gray`,
         padding: 2,
     },
     section: {
         paddingTop: 16,
     },
-    label: {
-        textAlign: 'left',
+    stat: {
         paddingLeft: 16,
         paddingRight: 16,
-        cursor: "pointer",
-        ":hover": {
-            background: Color.offBlack16,
-        },
+    },
+    label: {
+        textAlign: 'left',
     },
     selected: {
         background: Color.teal,

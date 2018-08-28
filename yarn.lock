@@ -2,15 +2,62 @@
 # yarn lockfile v1
 
 
+"@khanacademy/wonder-blocks-button@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-button/-/wonder-blocks-button-2.1.1.tgz#1465238b9139f0c6ca35371be9b1b6d893f6a552"
+  dependencies:
+    "@khanacademy/wonder-blocks-color" "^1.0.8"
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
+    "@khanacademy/wonder-blocks-progress-spinner" "^1.0.5"
+    "@khanacademy/wonder-blocks-typography" "^1.0.8"
+
 "@khanacademy/wonder-blocks-color@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-color/-/wonder-blocks-color-1.0.6.tgz#623ad25f17c9967397399545375c1c0a9795b04f"
+
+"@khanacademy/wonder-blocks-color@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-color/-/wonder-blocks-color-1.0.8.tgz#630e9520c8dcf42fce61d708a1d2a067fad23a50"
 
 "@khanacademy/wonder-blocks-core@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-core/-/wonder-blocks-core-1.1.1.tgz#e7451e6f25634ec643ebe016bd26f6116e82461a"
   dependencies:
     "@khanacademy/wonder-blocks-spacing" "^2.0.4"
+
+"@khanacademy/wonder-blocks-core@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-core/-/wonder-blocks-core-1.2.1.tgz#1e34a17cc9127f46c5ec7c84d7dc5e7a323afbd7"
+  dependencies:
+    "@khanacademy/wonder-blocks-spacing" "^2.0.6"
+
+"@khanacademy/wonder-blocks-dropdown@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-dropdown/-/wonder-blocks-dropdown-1.0.2.tgz#7a2d2e92ffe0e966bb3df55e774b1555344d97e4"
+  dependencies:
+    "@khanacademy/wonder-blocks-button" "^2.1.1"
+    "@khanacademy/wonder-blocks-color" "^1.0.8"
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
+    "@khanacademy/wonder-blocks-icon" "^1.0.5"
+    "@khanacademy/wonder-blocks-icon-button" "^2.0.3"
+    "@khanacademy/wonder-blocks-layout" "^1.0.5"
+    "@khanacademy/wonder-blocks-modal" "^1.1.5"
+    "@khanacademy/wonder-blocks-spacing" "^2.0.6"
+    "@khanacademy/wonder-blocks-typography" "^1.0.8"
+
+"@khanacademy/wonder-blocks-icon-button@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-icon-button/-/wonder-blocks-icon-button-2.0.3.tgz#f786ecfdf2e69b61d9603ab5968e60777f7d1669"
+  dependencies:
+    "@khanacademy/wonder-blocks-color" "^1.0.8"
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
+    "@khanacademy/wonder-blocks-icon" "^1.0.5"
+
+"@khanacademy/wonder-blocks-icon@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-icon/-/wonder-blocks-icon-1.0.5.tgz#24a12c0d5f08ff71024497228f283b351355dd30"
+  dependencies:
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
 
 "@khanacademy/wonder-blocks-layout@^1.0.3":
   version "1.0.3"
@@ -19,15 +66,59 @@
     "@khanacademy/wonder-blocks-core" "^1.1.1"
     "@khanacademy/wonder-blocks-spacing" "^2.0.4"
 
+"@khanacademy/wonder-blocks-layout@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-layout/-/wonder-blocks-layout-1.0.5.tgz#ab5712dcc392201f7fc91809b96a2bc1e923e58e"
+  dependencies:
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
+    "@khanacademy/wonder-blocks-spacing" "^2.0.6"
+
+"@khanacademy/wonder-blocks-modal@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-modal/-/wonder-blocks-modal-1.1.5.tgz#026724e7e0804c78a1c650724c80aff5ac3b1630"
+  dependencies:
+    "@khanacademy/wonder-blocks-color" "^1.0.8"
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
+    "@khanacademy/wonder-blocks-icon" "^1.0.5"
+    "@khanacademy/wonder-blocks-icon-button" "^2.0.3"
+    "@khanacademy/wonder-blocks-toolbar" "^1.0.3"
+    "@khanacademy/wonder-blocks-typography" "^1.0.8"
+
+"@khanacademy/wonder-blocks-progress-spinner@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-progress-spinner/-/wonder-blocks-progress-spinner-1.0.5.tgz#34225fa7953bbb535eea778378fef04dd056c5a2"
+  dependencies:
+    "@khanacademy/wonder-blocks-color" "^1.0.8"
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
+    "@khanacademy/wonder-blocks-spacing" "^2.0.6"
+
 "@khanacademy/wonder-blocks-spacing@^2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-spacing/-/wonder-blocks-spacing-2.0.4.tgz#8cc2c9d294442c876e49ac1e7f2d9277a9b2e09c"
+
+"@khanacademy/wonder-blocks-spacing@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-spacing/-/wonder-blocks-spacing-2.0.6.tgz#67162e1843a45af55c98f384e5af239f14ff966a"
+
+"@khanacademy/wonder-blocks-toolbar@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-toolbar/-/wonder-blocks-toolbar-1.0.3.tgz#3eb54a1bcc2e58ae19a6094ffb3c758b76ee6a48"
+  dependencies:
+    "@khanacademy/wonder-blocks-color" "^1.0.8"
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
+    "@khanacademy/wonder-blocks-typography" "^1.0.8"
 
 "@khanacademy/wonder-blocks-typography@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-typography/-/wonder-blocks-typography-1.0.6.tgz#46efe8f5bf74fcf48218982ecb55458aa371bddd"
   dependencies:
     "@khanacademy/wonder-blocks-core" "^1.1.1"
+
+"@khanacademy/wonder-blocks-typography@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@khanacademy/wonder-blocks-typography/-/wonder-blocks-typography-1.0.8.tgz#dcd52d3bb937f7020264f2853fba88851b35d386"
+  dependencies:
+    "@khanacademy/wonder-blocks-core" "^1.2.1"
 
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"
@@ -466,7 +557,7 @@ babel-register@^6.26.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.15"
 
-babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@6.x.x, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -901,6 +992,13 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-context@^0.2.1:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.2.3.tgz#9ec140a6914a22ef04b8b09b7771de89567cb6f3"
+  dependencies:
+    fbjs "^0.8.0"
+    gud "^1.0.0"
+
 cross-spawn@^5.0.1:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -1194,7 +1292,7 @@ fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
 
-fbjs@^0.8.16:
+fbjs@^0.8.0, fbjs@^0.8.16:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -1351,6 +1449,10 @@ globals@^9.18.0:
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
+
+gud@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
 
 has-ansi@^2.0.0:
   version "2.0.0"
@@ -2282,6 +2384,10 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+popper.js@^1.14.1, popper.js@^1.14.4:
+  version "1.14.4"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.4.tgz#8eec1d8ff02a5a3a152dd43414a15c7b79fd69b6"
+
 portfinder@^1.0.13:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.17.tgz#a8a1691143e46c4735edefcf4fbcccedad26456a"
@@ -2410,6 +2516,17 @@ react-dom@^16.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-popper@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-1.0.2.tgz#0e72f338b7f15ab9f9ec884e36ae0dad78a3e301"
+  dependencies:
+    babel-runtime "6.x.x"
+    create-react-context "^0.2.1"
+    popper.js "^1.14.1"
+    prop-types "^15.6.1"
+    typed-styles "^0.0.5"
+    warning "^3.0.0"
 
 react-router-dom@^4.3.1:
   version "4.3.1"
@@ -2894,6 +3011,10 @@ tslib@^1.9.0:
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
+
+typed-styles@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/typed-styles/-/typed-styles-0.0.5.tgz#a60df245d482a9b1adf9c06c078d0f06085ed1cf"
 
 typedarray@^0.0.6:
   version "0.0.6"
