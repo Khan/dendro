@@ -73,7 +73,11 @@ export default class Stats extends React.Component<Props> {
                 </td>
             </tr>
             {section.stats.map(key => {
-                return <tr key={key} className={css(styles.row, key === this.state.stat && styles.selected)}>
+                return <tr 
+                    key={key}
+                    className={css(styles.row, key === this.state.stat && styles.selected)}
+                    onClick={() => this.setState({stat: key})}
+                >
                     <th 
                         className={
                             css(
@@ -82,7 +86,6 @@ export default class Stats extends React.Component<Props> {
                                 styles.stat,
                             )
                         }
-                        onClick={() => this.setState({stat: key})}
                     >
                         <LabelLarge>{plugins[key].label}</LabelLarge>
                     </th>
