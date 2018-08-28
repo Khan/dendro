@@ -102,15 +102,16 @@ export default class Stats extends React.Component<Props> {
     render() {
         const {data} = this.props;
         return <View style={styles.container}>
-            <View style={styles.column}>
-                <HeadingLarge>Package Stats</HeadingLarge>
+            <HeadingLarge>Stats</HeadingLarge>
+            <HeadingLarge>Files</HeadingLarge>
+            <View style={styles.scrollable}>
                 <table className={css(styles.table)}>
                     <tbody>
                         {config.map(section => this.renderSection(section))}
                     </tbody>
                 </table>
             </View>
-            <View style={styles.column}>
+            <View style={styles.scrollable}>
                 <table>
                     <tbody>
                         {Object.keys(data).sort().map(filename => {
@@ -133,17 +134,21 @@ export default class Stats extends React.Component<Props> {
                     </tbody>
                 </table>
             </View>
+            
         </View>;
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        display: "grid",
+        gridTemplateColumns: "500px auto",
         flexShrink: 1,
         flexDirection: "row",
         color: Color.offBlack,
         flexGrow: 1,
         height: "100%",
+        paddingLeft: 16,
     },
     column: {
         flexShrink: 0,
@@ -152,7 +157,6 @@ const styles = StyleSheet.create({
     },
     table: {
         borderCollapse: "collapse",
-        marginLeft: 16,
     },
     row: {
         cursor: "pointer",
@@ -178,5 +182,8 @@ const styles = StyleSheet.create({
         ":hover": {
             background: Color.teal,
         },
+    },
+    scrollable: {
+        overflow: "auto",
     },
 });
