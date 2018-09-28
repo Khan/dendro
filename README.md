@@ -4,9 +4,15 @@ A tool that can analyze dependency trees.
 
 ## Getting Started
 
+- in khan folder: git checkout https://github.com/khan/dendro
+- cd dendro
 - yarn install
 - yarn link
-- dep-walker path/to/file (you can run this from any folder)
+- cd ../webapp
+- dendro -o ../dendro/data/output.json javascript/content-library-package/content-library-modules.js
+- cd ../dendro
+- yarn build
+- yarn start
 
 ## Roadmap
 
